@@ -1,0 +1,44 @@
+{
+  "name": "Blazor Log Viewer",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "humao.rest-client",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "files.trimTrailingWhitespace": true,
+        "dotnet.defaultSolution": "LogViewer.sln"
+      }
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+
+  "forwardPorts": [5000, 5001, 7000],
+  "portsAttributes": {
+    "5001": { "label": "Blazor App (HTTPS)", "onAutoForward": "openBrowser" },
+    "5000": { "label": "Blazor App (HTTP)" }
+  },
+
+  "remoteEnv": {
+    "ASPNETCORE_ENVIRONMENT": "Development",
+    "ASPNETCORE_URLS": "https://+:5001;http://+:5000"
+  }
+}
